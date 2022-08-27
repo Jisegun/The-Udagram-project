@@ -29,11 +29,11 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
       const filterImage = await filterImageFromURL(image_url);
 
      // 3. send the resulting file in the response
-        return res.status(200).sendFile(filterImage);
+        return res.status(200).sendFile(filterImage, () => deleteLocalFiles([filterImage]));
 
     //  4. deletes any files on the server on finish of the response
 
-        res.on("finish", () => deleteLocalFiles([filterImage]));
+    //    res.on("finish", () => deleteLocalFiles([filterImage]));
 
     }  
     catch (error) {
