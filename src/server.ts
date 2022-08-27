@@ -30,11 +30,11 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
       const filterImage = await filterImageFromURL(image_url);
 
      // 3. send the resulting file in the response
-         res.status(200).sendFile(filterImage);
+         res.status(200).sendFile(filterImage, () => deleteLocalFiles([filterImage]));
 
     //  4. deletes any files on the server on finish of the response
 
-         req.on('finish', () => deleteLocalFiles([filterImage]));
+     //    req.on('finish', () => deleteLocalFiles([filterImage]));
 
     }  
     catch (error) {
